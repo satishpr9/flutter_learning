@@ -12,27 +12,34 @@ class Homepage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Hello"),
+        title: Text("Satish"),
       ),
-      body: Center(
-        child: Container(
-          padding: const EdgeInsets.all(20),
-          alignment: Alignment.center,
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget> [
+        Container(
+          color: Colors.green,
           height: 100,
           width: 100,
-          decoration: BoxDecoration(
-            color: Colors.greenAccent,
-            borderRadius: BorderRadius.circular(10),
-            gradient: LinearGradient(
-              colors: [Colors.blue, Colors.red,] 
-              ),
-              boxShadow: [BoxShadow( 
-                blurRadius: 5,
-                color: Colors.grey[500],
-                offset: Offset(2.0,3.0)
-              )],
-          ),
-          child: Text("Satish",style: TextStyle(color:Colors.white,fontSize: 18 ),),
+          padding: const EdgeInsets.all(8),
+          
+        ),
+        Container(
+          color: Colors.blue,
+          height: 100,
+          width: 100,
+          padding: const EdgeInsets.all(8),
+        ),
+        Container(
+          color: Colors.yellow,
+          height: 100,
+          width: 100,
+          padding: const EdgeInsets.all(8),
+        ),
+          ],
         ),
       ),
     );
