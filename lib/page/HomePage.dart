@@ -1,9 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-
-import '../Bg_Image.dart';
 import '../Drawer.dart';
-
-
+import 'package:http/http.dart' as http;
 
 class Homepage extends StatefulWidget {
   @override
@@ -13,9 +12,19 @@ class Homepage extends StatefulWidget {
 class _HomepageState extends State<Homepage> {
   TextEditingController _nameController = TextEditingController();
   var myText = "Hello";
+  var url = "https://jsonplaceholder.typicode.com/photos";
+  var data;
   @override
   void initState() {
     super.initState();
+    getData();
+  }
+
+  getData() async {
+    var res = await http.get(url);
+    data = jsonDecode(res.body);
+    print(data);
+    setState(() {});
   }
 
   @override
@@ -26,39 +35,18 @@ class _HomepageState extends State<Homepage> {
         title: Text("Awesome App"),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: SingleChildScrollView(
-          child: Card(
-            child: Column(
-              children: <Widget>[
-                BgImage(),
-                SizedBox(
-                  height: 12,
-                ),
-                Text(
-                  myText,
-                  style: TextStyle(fontSize: 20),
-                ),
-                SizedBox(
-                  height: 12,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextField(
-                    controller: _nameController,
-                    keyboardType: TextInputType.text,
-                    decoration: InputDecoration(
-                        hintText: "Enter SomeThing",
-                        border: OutlineInputBorder(),
-                        labelText: "Name"),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-      drawer:MyDrawer(),
+          padding: const EdgeInsets.all(10.0),
+          child: data != null
+              ? ListView.builder(itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text(data[index]['title']),
+                  leading: Image.network(data[index]['url']),
+                );
+              })
+              : Center(
+                  child: CircularProgressIndicator(),
+                )),
+      drawer: MyDrawer(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           myText = _nameController.text;
