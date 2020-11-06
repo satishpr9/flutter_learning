@@ -38,9 +38,12 @@ class _HomepageState extends State<Homepage> {
           padding: const EdgeInsets.all(10.0),
           child: data != null
               ? ListView.builder(itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(data[index]['title']),
-                  leading: Image.network(data[index]['url']),
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ListTile(
+                    title: Text(data[index]['title']),
+                    leading: Image.network(data[index]['url']),
+                  ),
                 );
               })
               : Center(
