@@ -1,5 +1,6 @@
 import 'package:Demo/Bg_Image.dart';
 import 'package:Demo/page/HomePage.dart';
+import 'package:Demo/utils/constaint.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -13,6 +14,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("LoginPage"),
+        
       ),
       body: Stack(
         fit: StackFit.expand,
@@ -50,12 +52,17 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(
                       height: 15,
                     ),
-                    RaisedButton(onPressed: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>Homepage()));
-                    },
-                    child: Text("sign in"),
-                    color: Colors.orange,
-                    textColor: Colors.white,
+                    RaisedButton(
+                      onPressed: () {
+                        Constaint.prefs.setBool("loggedIn", true);
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Homepage()));
+                      },
+                      child: Text("sign in"),
+                      color: Colors.orange,
+                      textColor: Colors.white,
                     ),
                   ]),
                 ),

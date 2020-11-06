@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:Demo/page/LoginPage.dart';
+import 'package:Demo/utils/constaint.dart';
 import 'package:flutter/material.dart';
 import '../Drawer.dart';
 import 'package:http/http.dart' as http;
@@ -33,6 +35,12 @@ class _HomepageState extends State<Homepage> {
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
         title: Text("Awesome App"),
+        actions:<Widget> [
+          IconButton(icon:Icon(Icons.all_out), onPressed: (){
+            Constaint.prefs.setBool("loggedIn", false);
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginPage()));
+          })
+        ],
       ),
       body: Padding(
           padding: const EdgeInsets.all(10.0),
